@@ -522,6 +522,288 @@
             margin-bottom: 20px;
         }
 
+        /* Water Leaks App Demo Styles */
+        .demo-app {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .app-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .app-content {
+            padding: 20px;
+        }
+
+        .leak-type-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .leak-type-btn {
+            padding: 15px;
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .leak-type-btn:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .leak-type-btn.active {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .leak-type-btn i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .location-selection {
+            margin-bottom: 20px;
+        }
+
+        .location-map {
+            height: 150px;
+            background: linear-gradient(135deg, #e6f2ff, #caf0f8);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--light-blue);
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .map-pin:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .pin-1 { top: 30%; left: 30%; }
+        .pin-2 { top: 60%; left: 50%; }
+        .pin-3 { top: 40%; left: 70%; }
+        .pin-4 { top: 70%; left: 20%; }
+
+        .photo-upload {
+            margin-bottom: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-blue);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .upload-area i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .description-input {
+            margin-bottom: 20px;
+        }
+
+        .description-input textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .description-input textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .app-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .app-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .app-btn.cancel {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #dee2e6;
+        }
+
+        .app-btn.cancel:hover {
+            background: #e9ecef;
+        }
+
+        .app-btn.submit {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+        }
+
+        .app-btn.submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 119, 182, 0.3);
+        }
+
+        .confirmation-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .confirmation-screen i {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .report-id {
+            background: var(--light-blue);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        /* Modal Styles for Demo App */
+        .demo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .demo-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 2px solid var(--light-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: #f8f9fa;
+            color: var(--primary-blue);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .main-title {
@@ -543,6 +825,18 @@
             
             .chart-container {
                 height: 300px;
+            }
+
+            .demo-modal {
+                padding: 10px;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+            }
+
+            .leak-type-selector {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -599,6 +893,82 @@
     <!-- Background Effects -->
     <div class="water-flow"></div>
     <div class="water-drops" id="waterDrops"></div>
+
+    <!-- Water Leaks App Demo Modal -->
+    <div class="demo-modal" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-mobile-alt"></i> Water Wise Report Leaks App Demo</h3>
+                <button class="close-modal" onclick="closeDemo()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="appScreen">
+                    <div class="demo-app">
+                        <div class="app-header">
+                            <h3><i class="fas fa-tint"></i> Report Water Leak</h3>
+                        </div>
+                        <div class="app-content">
+                            <div class="leak-type-selector">
+                                <div class="leak-type-btn" data-type="pipe" onclick="selectLeakType('pipe')">
+                                    <i class="fas fa-wrench"></i>
+                                    <div>Pipe Burst</div>
+                                </div>
+                                <div class="leak-type-btn" data-type="tap" onclick="selectLeakType('tap')">
+                                    <i class="fas fa-faucet"></i>
+                                    <div>Leaking Tap</div>
+                                </div>
+                                <div class="leak-type-btn" data-type="toilet" onclick="selectLeakType('toilet')">
+                                    <i class="fas fa-toilet"></i>
+                                    <div>Toilet Leak</div>
+                                </div>
+                                <div class="leak-type-btn" data-type="drain" onclick="selectLeakType('drain')">
+                                    <i class="fas fa-water"></i>
+                                    <div>Blocked Drain</div>
+                                </div>
+                            </div>
+
+                            <div class="location-selection">
+                                <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--dark-blue);">
+                                    <i class="fas fa-map-marker-alt"></i> Select Location
+                                </label>
+                                <div class="location-map" id="locationMap">
+                                    <!-- Map pins will be added here -->
+                                </div>
+                                <div class="text-center mt-2">
+                                    <small class="text-muted">Tap on the map to mark leak location</small>
+                                </div>
+                            </div>
+
+                            <div class="photo-upload">
+                                <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--dark-blue);">
+                                    <i class="fas fa-camera"></i> Add Photo (Optional)
+                                </label>
+                                <div class="upload-area" onclick="uploadPhoto()">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <div>Tap to upload photo</div>
+                                    <small class="text-muted">Max 5MB, JPG/PNG</small>
+                                </div>
+                            </div>
+
+                            <div class="description-input">
+                                <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--dark-blue);">
+                                    <i class="fas fa-comment"></i> Description
+                                </label>
+                                <textarea id="leakDescription" rows="3" placeholder="Describe the leak problem..."></textarea>
+                            </div>
+
+                            <div class="app-footer">
+                                <button class="app-btn cancel" onclick="resetForm()">Cancel</button>
+                                <button class="app-btn submit" onclick="submitReport()">Submit Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="main-container">
         <!-- Header -->
@@ -1061,7 +1431,7 @@
                                 <i class="fas fa-mobile-alt fa-2x text-primary mb-2"></i>
                                 <h6>Report Leaks App</h6>
                                 <p class="small">Easy way to report water problems using phones</p>
-                                <button class="water-button btn-sm mt-2" onclick="createRipple(event)">
+                                <button class="water-button btn-sm mt-2" onclick="openDemoApp()">
                                     Try Demo
                                 </button>
                             </div>
@@ -1140,7 +1510,281 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Create water drops
+        // Demo App State
+        let currentLeakType = null;
+        let selectedLocation = null;
+        let demoReportSubmitted = false;
+
+        // Open demo app
+        function openDemoApp() {
+            const modal = document.getElementById('demoModal');
+            modal.classList.add('active');
+            
+            // Reset form state
+            resetDemoApp();
+            
+            // Create map pins
+            createMapPins();
+            
+            // Create ripple effect
+            createRipple({currentTarget: document.querySelector('[onclick="openDemoApp()"]'), clientX: 100, clientY: 50});
+        }
+
+        // Close demo app
+        function closeDemo() {
+            const modal = document.getElementById('demoModal');
+            modal.classList.remove('active');
+            resetDemoApp();
+        }
+
+        // Reset demo app
+        function resetDemoApp() {
+            currentLeakType = null;
+            selectedLocation = null;
+            demoReportSubmitted = false;
+            
+            // Reset UI
+            document.querySelectorAll('.leak-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById('leakDescription').value = '';
+            
+            // Show main screen
+            document.getElementById('appScreen').innerHTML = `
+                <div class="demo-app">
+                    <div class="app-header">
+                        <h3><i class="fas fa-tint"></i> Report Water Leak</h3>
+                    </div>
+                    <div class="app-content">
+                        <div class="leak-type-selector">
+                            <div class="leak-type-btn" data-type="pipe" onclick="selectLeakType('pipe')">
+                                <i class="fas fa-wrench"></i>
+                                <div>Pipe Burst</div>
+                            </div>
+                            <div class="leak-type-btn" data-type="tap" onclick="selectLeakType('tap')">
+                                <i class="fas fa-faucet"></i>
+                                <div>Leaking Tap</div>
+                            </div>
+                            <div class="leak-type-btn" data-type="toilet" onclick="selectLeakType('toilet')">
+                                <i class="fas fa-toilet"></i>
+                                <div>Toilet Leak</div>
+                            </div>
+                            <div class="leak-type-btn" data-type="drain" onclick="selectLeakType('drain')">
+                                <i class="fas fa-water"></i>
+                                <div>Blocked Drain</div>
+                            </div>
+                        </div>
+
+                        <div class="location-selection">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--dark-blue);">
+                                <i class="fas fa-map-marker-alt"></i> Select Location
+                            </label>
+                            <div class="location-map" id="locationMap">
+                                <!-- Map pins will be added here -->
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted">Tap on the map to mark leak location</small>
+                            </div>
+                        </div>
+
+                        <div class="photo-upload">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--dark-blue);">
+                                <i class="fas fa-camera"></i> Add Photo (Optional)
+                            </label>
+                            <div class="upload-area" onclick="uploadPhoto()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <div>Tap to upload photo</div>
+                                <small class="text-muted">Max 5MB, JPG/PNG</small>
+                            </div>
+                        </div>
+
+                        <div class="description-input">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--dark-blue);">
+                                <i class="fas fa-comment"></i> Description
+                            </label>
+                            <textarea id="leakDescription" rows="3" placeholder="Describe the leak problem..."></textarea>
+                        </div>
+
+                        <div class="app-footer">
+                            <button class="app-btn cancel" onclick="resetForm()">Cancel</button>
+                            <button class="app-btn submit" onclick="submitReport()">Submit Report</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Re-create map pins
+            setTimeout(createMapPins, 100);
+        }
+
+        // Select leak type
+        function selectLeakType(type) {
+            currentLeakType = type;
+            
+            // Update UI
+            document.querySelectorAll('.leak-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.type === type) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Create ripple effect
+            createRipple({currentTarget: event.target.closest('.leak-type-btn'), clientX: 50, clientY: 50});
+        }
+
+        // Create map pins
+        function createMapPins() {
+            const map = document.getElementById('locationMap');
+            if (!map) return;
+            
+            map.innerHTML = '';
+            
+            // Create pins
+            const pins = [
+                {class: 'pin-1', top: '30%', left: '30%'},
+                {class: 'pin-2', top: '60%', left: '50%'},
+                {class: 'pin-3', top: '40%', left: '70%'},
+                {class: 'pin-4', top: '70%', left: '20%'}
+            ];
+            
+            pins.forEach(pin => {
+                const pinElement = document.createElement('div');
+                pinElement.className = `map-pin ${pin.class}`;
+                pinElement.style.top = pin.top;
+                pinElement.style.left = pin.left;
+                pinElement.onclick = () => selectLocation(pin.class);
+                map.appendChild(pinElement);
+            });
+            
+            // Make map clickable
+            map.onclick = (e) => {
+                if (e.target.classList.contains('location-map')) {
+                    const rect = map.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    // Create new pin
+                    const newPin = document.createElement('div');
+                    newPin.className = 'map-pin';
+                    newPin.style.top = `${y}%`;
+                    newPin.style.left = `${x}%`;
+                    newPin.onclick = () => selectLocation('custom');
+                    map.appendChild(newPin);
+                    
+                    selectLocation('custom');
+                }
+            };
+        }
+
+        // Select location
+        function selectLocation(location) {
+            selectedLocation = location;
+            
+            // Highlight selected pin
+            document.querySelectorAll('.map-pin').forEach(pin => {
+                pin.style.background = 'var(--primary-blue)';
+                pin.style.transform = 'translate(-50%, -50%)';
+            });
+            
+            if (event && event.target) {
+                event.target.style.background = 'var(--accent-teal)';
+                event.target.style.transform = 'translate(-50%, -50%) scale(1.2)';
+            }
+        }
+
+        // Upload photo (simulated)
+        function uploadPhoto() {
+            const uploadArea = document.querySelector('.upload-area');
+            uploadArea.innerHTML = `
+                <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                <div>Photo uploaded successfully!</div>
+                <small class="text-muted">photo_leak_001.jpg</small>
+            `;
+            uploadArea.style.borderColor = '#28a745';
+            uploadArea.style.background = '#d4edda';
+            
+            createRipple({currentTarget: uploadArea, clientX: 100, clientY: 50});
+        }
+
+        // Reset form
+        function resetForm() {
+            resetDemoApp();
+        }
+
+        // Submit report
+        function submitReport() {
+            if (!currentLeakType) {
+                alert('Please select a leak type');
+                return;
+            }
+            
+            if (!selectedLocation) {
+                alert('Please select a location on the map');
+                return;
+            }
+            
+            const description = document.getElementById('leakDescription').value;
+            if (!description.trim()) {
+                alert('Please add a description of the problem');
+                return;
+            }
+            
+            demoReportSubmitted = true;
+            
+            // Generate random report ID
+            const reportId = 'WL-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+            
+            // Show confirmation screen
+            document.getElementById('appScreen').innerHTML = `
+                <div class="demo-app">
+                    <div class="app-header">
+                        <h3><i class="fas fa-tint"></i> Report Submitted</h3>
+                    </div>
+                    <div class="app-content">
+                        <div class="confirmation-screen">
+                            <i class="fas fa-check-circle"></i>
+                            <h4 style="color: var(--dark-blue);">Leak Report Submitted Successfully!</h4>
+                            <p>Your report has been sent to the Water Wise response team.</p>
+                            
+                            <div class="report-id">Report ID: ${reportId}</div>
+                            
+                            <div style="background: var(--light-blue); padding: 20px; border-radius: 10px; text-align: left; margin: 20px 0;">
+                                <h6 style="color: var(--dark-blue); margin-bottom: 10px;">Report Details:</h6>
+                                <p><strong>Type:</strong> ${getLeakTypeName(currentLeakType)}</p>
+                                <p><strong>Location:</strong> ${selectedLocation === 'custom' ? 'Custom Location' : 'Pre-marked Location'}</p>
+                                <p><strong>Description:</strong> ${description}</p>
+                                <p><strong>Status:</strong> <span style="color: var(--primary-blue); font-weight: 600;">Pending Review</span></p>
+                            </div>
+                            
+                            <p class="small text-muted">A response team will contact you within 24 hours.</p>
+                            
+                            <div class="app-footer">
+                                <button class="app-btn cancel" onclick="resetDemoApp()">Report Another</button>
+                                <button class="app-btn submit" onclick="closeDemo()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Create ripple effect
+            createRipple({currentTarget: document.querySelector('.app-btn.submit'), clientX: 100, clientY: 50});
+        }
+
+        // Get leak type name
+        function getLeakTypeName(type) {
+            const types = {
+                'pipe': 'Pipe Burst',
+                'tap': 'Leaking Tap',
+                'toilet': 'Toilet Leak',
+                'drain': 'Blocked Drain'
+            };
+            return types[type] || type;
+        }
+
+        // Original functions from the main code
         function createWaterDrops() {
             const container = document.getElementById('waterDrops');
             for (let i = 0; i < 20; i++) {
@@ -1153,7 +1797,6 @@
             }
         }
 
-        // Create ripple effect
         function createRipple(event) {
             const ripple = document.createElement('div');
             ripple.className = 'ripple';
@@ -1165,16 +1808,8 @@
             setTimeout(() => {
                 ripple.remove();
             }, 2000);
-            
-            // Show tooltip for demo
-            if (event.currentTarget.textContent.includes('Demo') || 
-                event.currentTarget.textContent.includes('Learn') ||
-                event.currentTarget.textContent.includes('View')) {
-                showTooltip(event, 'This feature is being developed!');
-            }
         }
 
-        // Show tooltip
         function showTooltip(event, message) {
             const tooltip = document.createElement('div');
             tooltip.className = 'simple-tooltip';
@@ -1190,30 +1825,22 @@
             }, 2000);
         }
 
-        // Navigation
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Remove active class from all nav cards
             document.querySelectorAll('.nav-card').forEach(card => {
                 card.classList.remove('active');
             });
             
-            // Show selected section
             document.getElementById(sectionId).classList.add('active');
             
-            // Activate selected nav card
-            document.querySelector(`.nav-card[data-section="${sectionId}"]`).classList.add('active');
-            
-            // Create ripple effect on the nav card
             const navCard = document.querySelector(`.nav-card[data-section="${sectionId}"]`);
+            navCard.classList.add('active');
             createRipple({currentTarget: navCard, clientX: 100, clientY: 50});
         }
 
-        // Share report
         function shareReport() {
             if (navigator.share) {
                 navigator.share({
@@ -1227,7 +1854,6 @@
             }
         }
 
-        // Initialize charts
         function initializeCharts() {
             const colors = {
                 soweto: '#0077b6',
@@ -1235,7 +1861,6 @@
                 vibrant: ['#FF6B6B', '#4ECDC4', '#FFD166', '#06D6A0', '#118AB2', '#EF476F']
             };
 
-            // Overview Chart
             const overviewCtx = document.getElementById('overviewChart').getContext('2d');
             new Chart(overviewCtx, {
                 type: 'doughnut',
@@ -1253,16 +1878,12 @@
                     plugins: {
                         legend: {
                             position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                color: '#333'
-                            }
+                            labels: { color: '#333' }
                         }
                     }
                 }
             });
 
-            // Soweto Charts
             const sowetoCtx1 = document.getElementById('sowetoChart1').getContext('2d');
             new Chart(sowetoCtx1, {
                 type: 'bar',
@@ -1281,14 +1902,10 @@
                         y: {
                             beginAtZero: true,
                             max: 100,
-                            ticks: {
-                                callback: value => value + '%'
-                            }
+                            ticks: { callback: value => value + '%' }
                         }
                     },
-                    plugins: {
-                        legend: { display: false }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
 
@@ -1307,17 +1924,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                color: '#333'
-                            }
-                        }
+                        legend: { position: 'bottom', labels: { color: '#333' } }
                     }
                 }
             });
 
-            // Alexandra Chart
             const alexandraCtx = document.getElementById('alexandraChart').getContext('2d');
             new Chart(alexandraCtx, {
                 type: 'bar',
@@ -1336,18 +1947,13 @@
                         y: {
                             beginAtZero: true,
                             max: 100,
-                            ticks: {
-                                callback: value => value + '%'
-                            }
+                            ticks: { callback: value => value + '%' }
                         }
                     },
-                    plugins: {
-                        legend: { display: false }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
 
-            // Comparison Chart
             const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
             new Chart(comparisonCtx, {
                 type: 'radar',
@@ -1374,22 +1980,15 @@
                         r: {
                             beginAtZero: true,
                             max: 100,
-                            ticks: {
-                                callback: value => value + '%'
-                            }
+                            ticks: { callback: value => value + '%' }
                         }
                     },
                     plugins: {
-                        legend: {
-                            labels: {
-                                color: '#333'
-                            }
-                        }
+                        legend: { labels: { color: '#333' } }
                     }
                 }
             });
 
-            // Timeline Chart
             const timelineCtx = document.getElementById('timelineChart').getContext('2d');
             new Chart(timelineCtx, {
                 type: 'line',
@@ -1425,52 +2024,38 @@
                         y: {
                             beginAtZero: true,
                             max: 100,
-                            ticks: {
-                                callback: value => value + '%'
-                            }
+                            ticks: { callback: value => value + '%' }
                         }
                     },
                     plugins: {
-                        legend: {
-                            labels: {
-                                color: '#333'
-                            }
-                        }
+                        legend: { labels: { color: '#333' } }
                     }
                 }
             });
         }
 
-        // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
             createWaterDrops();
             initializeCharts();
             
-            // Add hover effect to all interactive elements
             document.querySelectorAll('.water-button, .nav-card, .stat-card').forEach(element => {
                 element.addEventListener('mouseenter', function(e) {
                     createRipple({currentTarget: this, clientX: e.clientX, clientY: e.clientY});
                 });
             });
             
-            // Add info bubbles to all elements with class has-info
             document.querySelectorAll('.has-info').forEach(element => {
                 element.addEventListener('mouseenter', function() {
                     const bubble = this.querySelector('.info-bubble');
-                    if (bubble) {
-                        bubble.style.transform = 'scale(1)';
-                    }
+                    if (bubble) bubble.style.transform = 'scale(1)';
                 });
                 
                 element.addEventListener('mouseleave', function() {
                     const bubble = this.querySelector('.info-bubble');
-                    if (bubble) {
-                        bubble.style.transform = 'scale(0)';
-                    }
+                    if (bubble) bubble.style.transform = 'scale(0)';
                 });
             });
             
-            // Animate progress bars on page load
             setTimeout(() => {
                 document.querySelectorAll('.progress-bar').forEach(bar => {
                     const width = bar.style.width;
@@ -1482,7 +2067,6 @@
             }, 1000);
         });
 
-        // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.altKey) {
                 switch(e.key) {
