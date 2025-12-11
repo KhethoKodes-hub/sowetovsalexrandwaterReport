@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Wise Comparative Analysis | Soweto vs Alexandra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --soweto-blue: #156cf0;
+            --alexandra-green: #2e8b57;
+            --primary-dark: #6889b8;
+            --glass-white: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-light: #f8f9fa;
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c6c9d5 0%, #0d7de7 50%, #3777e5 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Water Animation Background */
+        .water-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path fill="%2342a5f5" fill-opacity="0.2" d="M0,300L48,320C96,340,192,380,288,381.3C384,383,480,347,576,320C672,293,768,267,864,250C960,233,1056,227,1152,233.3C1248,240,1344,260,1392,270L1440,280L1440,600L1392,600C1344,600,1248,600,1152,600C1056,600,960,600,864,600C768,600,672,600,576,600C480,600,384,600,288,600C192,600,96,600,48,600L0,600Z"></path></svg>');
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1200px; }
+        }
+
+        /* Glassmorphism Container */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            border: none;
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs .nav-link {
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            border-radius: 50px;
+            margin: 0 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, var(--soweto-blue), var(--alexandra-green));
+            border: none;
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Comparison Cards */
+        .comparison-card {
+            background: linear-gradient(135deg, var(--glass-white), rgba(255, 255, 255, 0.05));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+        }
+
+        .soweto-highlight {
+            border-left: 5px solid var(--soweto-blue);
+            background: linear-gradient(90deg, rgba(44, 90, 160, 0.1), transparent);
+        }
+
+        .alexandra-highlight {
+            border-left: 5px solid var(--alexandra-green);
+            background: linear-gradient(90deg, rgba(46, 139, 87, 0.1), transparent);
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Charts Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .chart-container:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .progress {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            border-radius: 10px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* Recommendation Cards */
+        .recommendation-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .recommendation-card:hover {
+            transform: translateX(10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--soweto-blue), var(--alexandra-green));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--soweto-blue);
+        }
+
+        .timeline-item.alexandra::before {
+            background: var(--alexandra-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 15px;
+            }
+            
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            
+            .nav-tabs .nav-link {
+                margin: 5px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Header */
+        .main-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), transparent);
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 30px;
+        }
+
+        .main-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .main-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Water Background -->
+    <div class="water-bg"></div>
+
+    <!-- Main Container -->
+    <div class="container-fluid py-4 px-3 px-md-5">
+        
+        <!-- Header -->
+        <div class="main-header animate-fade-in">
+            <h1><i class="fas fa-tint"></i> Water Wise Comparative Analysis</h1>
+            <p>Soweto vs Alexandra | 2025 Outreach Data Analysis</p>
+            <div class="badge bg-gradient px-4 py-2 mt-3" style="background: linear-gradient(135deg, var(--soweto-blue), var(--alexandra-green));">
+                <i class="fas fa-database me-2"></i>360 Participants Analyzed
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs justify-content-center" id="analysisTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="comparison-tab" data-bs-toggle="tab" data-bs-target="#comparison" type="button" role="tab">
+                    <i class="fas fa-balance-scale"></i> Comparison
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="soweto-tab" data-bs-toggle="tab" data-bs-target="#soweto" type="button" role="tab">
+                    <i class="fas fa-map-marker-alt" style="color: var(--soweto-blue);"></i> Soweto Report
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="alexandra-tab" data-bs-toggle="tab" data-bs-target="#alexandra" type="button" role="tab">
+                    <i class="fas fa-map-marker-alt" style="color: var(--alexandra-green);"></i> Alexandra Report
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="recommendations-tab" data-bs-toggle="tab" data-bs-target="#recommendations" type="button" role="tab">
+                    <i class="fas fa-lightbulb"></i> Recommendations
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="analysisTabContent">
+            
+            <!-- Comparison Tab -->
+            <div class="tab-pane fade show active" id="comparison" role="tabpanel">
+                <div class="row">
+                    <!-- Key Stats Comparison -->
+                    <div class="col-12 mb-4">
+                        <div class="glass-card animate-fade-in" style="animation-delay: 0.1s;">
+                            <h3 class="mb-4"><i class="fas fa-chart-line me-2"></i>Key Statistics Comparison</h3>
+                            <div class="row">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="stat-card">
+                                        <div class="stat-label">Total Participants</div>
+                                        <div class="stat-number">360</div>
+                                        <div class="small">Combined Analysis</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="stat-card">
+                                        <div class="stat-label">Soweto Concern</div>
+                                        <div class="stat-number" style="color: var(--soweto-blue);">80%</div>
+                                        <div class="small">Water Concern Level</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="stat-card">
+                                        <div class="stat-label">Alexandra Concern</div>
+                                        <div class="stat-number" style="color: var(--alexandra-green);">72%</div>
+                                        <div class="small">Very Concerned</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="stat-card">
+                                        <div class="stat-label">Workshop Interest</div>
+                                        <div class="stat-number">80%</div>
+                                        <div class="small">Average Both Areas</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quantitative Comparison Charts -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card animate-fade-in" style="animation-delay: 0.2s;">
+                            <h4 class="mb-4"><i class="fas fa-chart-bar me-2"></i>Infrastructure Ratings</h4>
+                            <div class="chart-container">
+                                <canvas id="infrastructureComparisonChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card animate-fade-in" style="animation-delay: 0.3s;">
+                            <h4 class="mb-4"><i class="fas fa-chart-pie me-2"></i>Education Levels</h4>
+                            <div class="chart-container">
+                                <canvas id="educationComparisonChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Qualitative Insights -->
+                    <div class="col-12 mb-4">
+                        <div class="glass-card animate-fade-in" style="animation-delay: 0.4s;">
+                            <h3 class="mb-4"><i class="fas fa-comments me-2"></i>Qualitative Insights Comparison</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="comparison-card soweto-highlight">
+                                        <h5 class="mb-3" style="color: var(--soweto-blue);">
+                                            <i class="fas fa-map-marker-alt me-2"></i>Soweto Community Voices
+                                        </h5>
+                                        <div class="quote mb-3">
+                                            <i class="fas fa-quote-left text-muted me-2"></i>
+                                            "We don't know when water will go. No one tells us."
+                                            <i class="fas fa-quote-right text-muted ms-2"></i>
+                                        </div>
+                                        <div class="quote mb-3">
+                                            <i class="fas fa-quote-left text-muted me-2"></i>
+                                            "Our meter doesn't work, and no one comes to fix it."
+                                            <i class="fas fa-quote-right text-muted ms-2"></i>
+                                        </div>
+                                        <div class="progress-container">
+                                            <div class="progress-label">
+                                                <span>Communication Gap</span>
+                                                <span>85%</span>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 85%; background: var(--soweto-blue);"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="comparison-card alexandra-highlight">
+                                        <h5 class="mb-3" style="color: var(--alexandra-green);">
+                                            <i class="fas fa-map-marker-alt me-2"></i>Alexandra Community Voices
+                                        </h5>
+                                        <div class="quote mb-3">
+                                            <i class="fas fa-quote-left text-muted me-2"></i>
+                                            "When it rains, there is no drainage system for water to go."
+                                            <i class="fas fa-quote-right text-muted ms-2"></i>
+                                        </div>
+                                        <div class="quote mb-3">
+                                            <i class="fas fa-quote-left text-muted me-2"></i>
+                                            "All toilets in the yard are blocked and throwing waste everywhere."
+                                            <i class="fas fa-quote-right text-muted ms-2"></i>
+                                        </div>
+                                        <div class="progress-container">
+                                            <div class="progress-label">
+                                                <span>Drainage Issues</span>
+                                                <span>58%</span>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 58%; background: var(--alexandra-green);"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue Comparison -->
+                    <div class="col-12">
+                        <div class="glass-card animate-fade-in" style="animation-delay: 0.5s;">
+                            <h3 class="mb-4"><i class="fas fa-exclamation-triangle me-2"></i>Top Issues Comparison</h3>
+                            <div class="chart-container">
+                                <canvas id="issuesComparisonChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soweto Report Tab -->
+            <div class="tab-pane fade" id="soweto" role="tabpanel">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="glass-card" style="border-left: 5px solid var(--soweto-blue);">
+                            <h2 class="mb-4" style="color: var(--soweto-blue);">
+                                <i class="fas fa-map-marker-alt me-2"></i>Soweto Water Wise Report
+                            </h2>
+                            <p class="lead">292 Participants | Multi-day Outreach | Summit Completion</p>
+                        </div>
+                    </div>
+
+                    <!-- Soweto Stats -->
+                    <div class="col-md-4 mb-4">
+                        <div class="stat-card" style="border-top: 4px solid var(--soweto-blue);">
+                            <i class="fas fa-users fa-2x mb-3" style="color: var(--soweto-blue);"></i>
+                            <div class="stat-number" style="color: var(--soweto-blue);">292</div>
+                            <div class="stat-label">Total Participants</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="stat-card" style="border-top: 4px solid var(--soweto-blue);">
+                            <i class="fas fa-water fa-2x mb-3" style="color: var(--soweto-blue);"></i>
+                            <div class="stat-number" style="color: var(--soweto-blue);">80%</div>
+                            <div class="stat-label">Water Concern</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="stat-card" style="border-top: 4px solid var(--soweto-blue);">
+                            <i class="fas fa-graduation-cap fa-2x mb-3" style="color: var(--soweto-blue);"></i>
+                            <div class="stat-number" style="color: var(--soweto-blue);">78%</div>
+                            <div class="stat-label">Workshop Interest</div>
+                        </div>
+                    </div>
+
+                    <!-- Soweto Charts -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4">Household Composition</h4>
+                            <div class="chart-container">
+                                <canvas id="sowetoHouseholdChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4">Water Shortage Frequency</h4>
+                            <div class="chart-container">
+                                <canvas id="sowetoShortageChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soweto Qualitative -->
+                    <div class="col-12 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4">Key Challenges Identified</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item bg-transparent text-light">
+                                            <i class="fas fa-bullhorn text-warning me-2"></i>
+                                            <strong>Lack of Communication:</strong> 85% report no outage information
+                                        </li>
+                                        <li class="list-group-item bg-transparent text-light">
+                                            <i class="fas fa-tachometer-alt text-danger me-2"></i>
+                                            <strong>Non-functional Meters:</strong> 40% of meters not working
+                                        </li>
+                                        <li class="list-group-item bg-transparent text-light">
+                                            <i class="fas fa-recycle text-info me-2"></i>
+                                            <strong>Greywater Reliance:</strong> Regular use during shortages
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item bg-transparent text-light">
+                                            <i class="fas fa-question-circle text-primary me-2"></i>
+                                            <strong>Reporting Knowledge Gap:</strong> 60% don't know how to report
+                                        </li>
+                                        <li class="list-group-item bg-transparent text-light">
+                                            <i class="fas fa-phone-slash text-secondary me-2"></i>
+                                            <strong>Local Preference:</strong> Prefer community offices over phone
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alexandra Report Tab -->
+            <div class="tab-pane fade" id="alexandra" role="tabpanel">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="glass-card" style="border-left: 5px solid var(--alexandra-green);">
+                            <h2 class="mb-4" style="color: var(--alexandra-green);">
+                                <i class="fas fa-map-marker-alt me-2"></i>Alexandra Water Wise Report
+                            </h2>
+                            <p class="lead">68 Household Surveys | Extended Analysis | October-December 2025</p>
+                        </div>
+                    </div>
+
+                    <!-- Alexandra Stats -->
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-card" style="border-top: 4px solid var(--alexandra-green);">
+                            <div class="stat-number" style="color: var(--alexandra-green);">68</div>
+                            <div class="stat-label">Household Surveys</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-card" style="border-top: 4px solid var(--alexandra-green);">
+                            <div class="stat-number" style="color: var(--alexandra-green);">58%</div>
+                            <div class="stat-label">Drainage Issues</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-card" style="border-top: 4px solid var(--alexandra-green);">
+                            <div class="stat-number" style="color: var(--alexandra-green);">52%</div>
+                            <div class="stat-label">Sewer Blockages</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-card" style="border-top: 4px solid var(--alexandra-green);">
+                            <div class="stat-number" style="color: var(--alexandra-green);">82%</div>
+                            <div class="stat-label">Workshop Interest</div>
+                        </div>
+                    </div>
+
+                    <!-- Alexandra Charts -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4">Infrastructure Crisis</h4>
+                            <div class="chart-container">
+                                <canvas id="alexandraInfrastructureChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4">Major Issues Reported</h4>
+                            <div class="chart-container">
+                                <canvas id="alexandraIssuesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alexandra Qualitative -->
+                    <div class="col-12 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4">Emergency Infrastructure Failures</h4>
+                            <div class="alert alert-warning bg-warning bg-opacity-10 border-warning">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>CRITICAL FINDING:</strong> 68% rate water infrastructure as "Poor" or "Very Poor"
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4 mb-3">
+                                    <div class="p-3 bg-danger bg-opacity-10 rounded">
+                                        <i class="fas fa-flood fa-2x text-danger mb-2"></i>
+                                        <h6>Drainage Collapse</h6>
+                                        <small>58% report flooding issues during rains</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="p-3 bg-warning bg-opacity-10 rounded">
+                                        <i class="fas fa-toilet fa-2x text-warning mb-2"></i>
+                                        <h6>Sewer Emergency</h6>
+                                        <small>52% report blocked toilets and overflows</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="p-3 bg-info bg-opacity-10 rounded">
+                                        <i class="fas fa-trash fa-2x text-info mb-2"></i>
+                                        <h6>Pollution Crisis</h6>
+                                        <small>48% report serious pollution from littering</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations Tab -->
+            <div class="tab-pane fade" id="recommendations" role="tabpanel">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="glass-card">
+                            <h2 class="mb-4"><i class="fas fa-lightbulb me-2"></i>Strategic Recommendations</h2>
+                            <p class="lead">Evidence-based interventions for Soweto & Alexandra</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4"><i class="fas fa-calendar-alt me-2"></i>Implementation Timeline</h4>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <h5>Phase 1: Emergency Response (1-3 months)</h5>
+                                    <p class="text-muted">Address critical infrastructure failures in Alexandra</p>
+                                </div>
+                                <div class="timeline-item alexandra">
+                                    <h5>Phase 2: Communication Systems (3-6 months)</h5>
+                                    <p class="text-muted">Implement SMS alerts and reporting apps</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h5>Phase 3: Community Training (6-9 months)</h5>
+                                    <p class="text-muted">Workshops and maintenance team development</p>
+                                </div>
+                                <div class="timeline-item alexandra">
+                                    <h5>Phase 4: Sustainability (9-12 months)</h5>
+                                    <p class="text-muted">Long-term maintenance and monitoring</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Priority Matrix -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4"><i class="fas fa-tasks me-2"></i>Priority Action Matrix</h4>
+                            <div class="table-responsive">
+                                <table class="table table-dark table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Priority</th>
+                                            <th>Soweto Focus</th>
+                                            <th>Alexandra Focus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="badge bg-danger">CRITICAL</span></td>
+                                            <td>Meter Communication</td>
+                                            <td>Drainage Emergency</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge bg-warning">HIGH</span></td>
+                                            <td>Reporting System</td>
+                                            <td>Sewer Rehabilitation</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge bg-info">MEDIUM</span></td>
+                                            <td>Greywater Education</td>
+                                            <td>Pollution Control</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge bg-success">LOW</span></td>
+                                            <td>Workshop Expansion</td>
+                                            <td>Maintenance Teams</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specific Recommendations -->
+                    <div class="col-md-6 mb-4">
+                        <div class="recommendation-card">
+                            <h5 style="color: var(--soweto-blue);">
+                                <i class="fas fa-map-marker-alt me-2"></i>Soweto-Specific
+                            </h5>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>SMS Alert System</strong> for outage communication
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Meter Maintenance Program</strong>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Local Community Reporting Office</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="recommendation-card">
+                            <h5 style="color: var(--alexandra-green);">
+                                <i class="fas fa-map-marker-alt me-2"></i>Alexandra-Specific
+                            </h5>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Emergency Drainage Repair Program</strong>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Sewer System Rehabilitation</strong>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Anti-Littering & Pollution Control</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Future Recommendations -->
+                    <div class="col-12 mb-4">
+                        <div class="glass-card">
+                            <h4 class="mb-4"><i class="fas fa-rocket me-2"></i>Future Program Development</h4>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="p-3 bg-primary bg-opacity-10 rounded h-100">
+                                        <i class="fas fa-mobile-alt fa-2x text-primary mb-2"></i>
+                                        <h6>Digital Integration</h6>
+                                        <small class="text-muted">"Report Leaks" app with GIS mapping</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="p-3 bg-success bg-opacity-10 rounded h-100">
+                                        <i class="fas fa-users fa-2x text-success mb-2"></i>
+                                        <h6>Community Empowerment</h6>
+                                        <small class="text-muted">Local maintenance teams & training</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="p-3 bg-warning bg-opacity-10 rounded h-100">
+                                        <i class="fas fa-expand-arrows-alt fa-2x text-warning mb-2"></i>
+                                        <h6>Scalability Model</h6>
+                                        <small class="text-muted">Expand to Thembisa and other areas</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success Metrics -->
+                    <div class="col-12">
+                        <div class="glass-card">
+                            <h4 class="mb-4"><i class="fas fa-chart-line me-2"></i>Success Metrics (12-Month Targets)</h4>
+                            <div class="chart-container">
+                                <canvas id="successMetricsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer animate-fade-in" style="animation-delay: 0.6s;">
+            <p>Water Wise Comparative Analysis Dashboard | December 2025</p>
+            <p class="small">Total Participants Analyzed: 360 | Soweto: 292 | Alexandra: 68 households</p>
+            <div class="mt-3">
+                <button class="btn btn-sm btn-outline-light me-2" onclick="window.print()">
+                    <i class="fas fa-print me-1"></i>Print Report
+                </button>
+                <button class="btn btn-sm btn-outline-light" onclick="exportData()">
+                    <i class="fas fa-download me-1"></i>Export Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize all charts
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeComparisonCharts();
+            initializeSowetoCharts();
+            initializeAlexandraCharts();
+            initializeRecommendationCharts();
+        });
+
+        // Chart configuration
+        const chartColors = {
+            soweto: '#2c5aa0',
+            alexandra: '#2e8b57',
+            vibrant: ['#FF6B6B', '#4ECDC4', '#FFD166', '#06D6A0', '#118AB2', '#EF476F', '#073B4C'],
+            gradientSoweto: ['#2c5aa0', '#3a6dc8'],
+            gradientAlexandra: ['#2e8b57', '#3da56e']
+        };
+
+        function initializeComparisonCharts() {
+            // Infrastructure Comparison Chart
+            const infraCtx = document.getElementById('infrastructureComparisonChart').getContext('2d');
+            new Chart(infraCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Poor/Very Poor', 'Fair', 'Good', 'Missing'],
+                    datasets: [{
+                        label: 'Soweto',
+                        data: [45, 21.4, 15, 18.6],
+                        backgroundColor: chartColors.gradientSoweto[0],
+                        borderColor: chartColors.gradientSoweto[1],
+                        borderWidth: 2
+                    }, {
+                        label: 'Alexandra',
+                        data: [68, 15, 10, 7],
+                        backgroundColor: chartColors.gradientAlexandra[0],
+                        borderColor: chartColors.gradientAlexandra[1],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: value => value + '%'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Education Comparison Chart
+            const eduCtx = document.getElementById('educationComparisonChart').getContext('2d');
+            new Chart(eduCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Educated', 'Not Educated', 'Not Sure'],
+                    datasets: [{
+                        data: [55, 45, 0],
+                        backgroundColor: [chartColors.vibrant[0], chartColors.vibrant[1], chartColors.vibrant[2]]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Issues Comparison Chart
+            const issuesCtx = document.getElementById('issuesComparisonChart').getContext('2d');
+            new Chart(issuesCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Communication', 'Meter Issues', 'Drainage', 'Sewer', 'Pollution', 'Education Gap'],
+                    datasets: [{
+                        label: 'Soweto',
+                        data: [85, 40, 20, 15, 25, 45],
+                        backgroundColor: chartColors.soweto + '40',
+                        borderColor: chartColors.soweto,
+                        borderWidth: 2,
+                        pointBackgroundColor: chartColors.soweto
+                    }, {
+                        label: 'Alexandra',
+                        data: [20, 25, 58, 52, 48, 68],
+                        backgroundColor: chartColors.alexandra + '40',
+                        borderColor: chartColors.alexandra,
+                        borderWidth: 2,
+                        pointBackgroundColor: chartColors.alexandra
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: value => value + '%'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeSowetoCharts() {
+            // Soweto Household Chart
+            const householdCtx = document.getElementById('sowetoHouseholdChart').getContext('2d');
+            new Chart(householdCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['6+ people', '1 person', '4-5 people', '2-3 people'],
+                    datasets: [{
+                        data: [33.5, 25, 25, 16.5],
+                        backgroundColor: chartColors.vibrant,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Soweto Shortage Chart
+            const shortageCtx = document.getElementById('sowetoShortageChart').getContext('2d');
+            new Chart(shortageCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Occasionally', 'Frequently', 'Rarely', 'Missing'],
+                    datasets: [{
+                        data: [66.7, 19, 2.4, 11.9],
+                        backgroundColor: chartColors.vibrant,
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: value => value + '%'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeAlexandraCharts() {
+            // Alexandra Infrastructure Chart
+            const alexInfraCtx = document.getElementById('alexandraInfrastructureChart').getContext('2d');
+            new Chart(alexInfraCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Very Poor', 'Poor', 'Fair', 'Good', 'Excellent'],
+                    datasets: [{
+                        data: [45, 23, 15, 10, 7],
+                        backgroundColor: chartColors.vibrant,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Alexandra Issues Chart
+            const alexIssuesCtx = document.getElementById('alexandraIssuesChart').getContext('2d');
+            new Chart(alexIssuesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Drainage Issues', 'Sewer Blockages', 'Pollution', 'Water Shedding', 'Infrastructure'],
+                    datasets: [{
+                        data: [58, 52, 48, 35, 68],
+                        backgroundColor: chartColors.alexandra,
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: value => value + '%'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeRecommendationCharts() {
+            // Success Metrics Chart
+            const successCtx = document.getElementById('successMetricsChart').getContext('2d');
+            new Chart(successCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 0', 'Month 3', 'Month 6', 'Month 9', 'Month 12'],
+                    datasets: [{
+                        label: 'Drainage Complaints',
+                        data: [100, 80, 60, 45, 40],
+                        borderColor: chartColors.vibrant[0],
+                        backgroundColor: chartColors.vibrant[0] + '20',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: 'Reporting Knowledge',
+                        data: [38, 55, 70, 82, 90],
+                        borderColor: chartColors.vibrant[1],
+                        backgroundColor: chartColors.vibrant[1] + '20',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: 'Conservation Adoption',
+                        data: [25, 45, 65, 78, 85],
+                        borderColor: chartColors.vibrant[2],
+                        backgroundColor: chartColors.vibrant[2] + '20',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: value => value + '%'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Export data function
+        function exportData() {
+            const data = {
+                comparison: {
+                    infrastructure: {
+                        soweto: [45, 21.4, 15, 18.6],
+                        alexandra: [68, 15, 10, 7]
+                    },
+                    education: [55, 45, 0],
+                    issues: {
+                        soweto: [85, 40, 20, 15, 25, 45],
+                        alexandra: [20, 25, 58, 52, 48, 68]
+                    }
+                },
+                soweto: {
+                    household: [33.5, 25, 25, 16.5],
+                    shortage: [66.7, 19, 2.4, 11.9]
+                },
+                alexandra: {
+                    infrastructure: [45, 23, 15, 10, 7],
+                    issues: [58, 52, 48, 35, 68]
+                }
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "waterwise_comparison_data.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            
+            alert('Data exported successfully!');
+        }
+
+        // Animate progress bars on tab change
+        document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', function() {
+                document.querySelectorAll('.progress-bar').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            });
+        });
+
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+</body>
+</html>
