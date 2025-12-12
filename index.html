@@ -1387,7 +1387,7 @@
 
         // Share functions
         function shareViaEmail() {
-            const subject = encodeURIComponent('Water Wise Townships Comparison - Alexandra vs Soweto');
+            const subject = encodeURIComponent('Rand Water Townships Comparison - Alexandra vs Soweto');
             const body = encodeURIComponent('Check out the comparative analysis of water issues in Alexandra (85 surveys) and Soweto (60 surveys)');
             window.location.href = `mailto:?subject=${subject}&body=${body}`;
             showToast('Opening email client...');
@@ -1976,7 +1976,7 @@
             const ws = XLSX.utils.aoa_to_sheet(data);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "Townships Comparison");
-            XLSX.writeFile(wb, "Water_Wise_Townships_Comparison_Report.xlsx");
+            XLSX.writeFile(wb, "Rand_Water_Townships_Comparison_Report.xlsx");
             showToast('Comparison Excel file downloaded successfully!');
         }
 
@@ -2047,7 +2047,7 @@
                 }
             });
 
-            showToast('Water Wise Townships Comparison Report loaded successfully!');
+            showToast('Rand Water Townships Comparison Report loaded successfully!');
         });
     </script>
 </body>
